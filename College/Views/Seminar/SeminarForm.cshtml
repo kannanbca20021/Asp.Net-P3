@@ -1,0 +1,48 @@
+﻿@model College.ViewModels.SeminarFormViewModel
+@{
+    ViewBag.Title = "SeminarForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>New Seminar</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("SaveSeminar", "Seminar"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(d => d.Seminar.Name)
+                @Html.TextBoxFor(d => d.Seminar.Name, new {@class = "form-control"})
+                @Html.ValidationMessageFor(d => d.Seminar.Name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(d => d.Seminar.Description)
+                @Html.TextAreaFor(d => d.Seminar.Description, new {@class = "form-control", id="description" })
+                @Html.ValidationMessageFor(d => d.Seminar.Description)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(d => d.Seminar.Date)
+                @Html.TextBoxFor(d => d.Seminar.Date,"{0:d MMM yyyy}", new {@class = "form-control"})
+                @Html.ValidationMessageFor(d => d.Seminar.Date)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(d => d.Seminar.DepartmentId)
+                @Html.DropDownListFor(d => d.Seminar.DepartmentId, new SelectList(Model.Departments, "Id", "Name"), "Select", new {@class = "form-control"})
+                @Html.ValidationMessageFor(d => d.Seminar.DepartmentId)
+            </div>
+            @Html.HiddenFor(d => d.Seminar.Id)
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary">Submit</button>
+        }
+    </div>
+</div>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        CKEDITOR.replace("description");
+    </script>
+}

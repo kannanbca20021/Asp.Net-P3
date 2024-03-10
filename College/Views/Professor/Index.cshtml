@@ -1,0 +1,56 @@
+﻿@model List<College.Models.Professor>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-6">
+        <h1>Professors</h1>
+    </div>
+    <div class="col-md-6 text-right">
+        <h1>
+            @Html.ActionLink("Add Professor", "AddProfessor", "Professor", new {}, new {@class = "btn btn-primary"})
+            @Html.ActionLink("Manage Posts", "ManagePost", "Professor", new {}, new {@class = "btn btn-primary"})
+        </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover table-striped table-bordered" id="professor">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Experience</th>
+                    <th>Post</th>
+                    <th>Edit/Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var professor in Model)
+            {
+                    <tr>
+                        <td>@Html.ActionLink(professor.Name, "ProfessorDetails", "Professor", new { id = professor.Id }, null)</td>
+                        <td>@professor.Department.Name</td>
+                        <td>@professor.ExperienceInYears year(s)</td>
+                        <td>@professor.Post.Name</td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditProfessor", "Professor", new { id = professor.Id }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Delete", "DeleteProfessor", "Professor", new { id = professor.Id }, new { onclick = "return confirm('Are you sure?');", @class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#professor").DataTable();
+        })
+    </script>
+}

@@ -1,0 +1,20 @@
+﻿@model College.Models.Professor
+@{
+    ViewBag.Title = "ProfessorDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>@Model.Name</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p>@Model.Department.Name</p>
+        <p>@Model.ExperienceInYears Year(s)</p>
+        <p>@Model.Post.Name</p>
+    </div>
+</div>
+
+

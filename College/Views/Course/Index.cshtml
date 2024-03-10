@@ -1,0 +1,51 @@
+﻿@model List<College.Models.Course>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-6">
+        <h1>Courses</h1>
+    </div>
+    <div class="col-md-6 text-right">
+        <h1>
+            @Html.ActionLink("Add Course", "AddCourse", "Course", new {}, new {@class = "btn btn-primary"})
+        </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover table-striped table-bordered" id="course">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Edit/Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var course in Model)
+            {
+                    <tr>
+                        <td>@Html.ActionLink(course.Name, "CourseDetails", "Course", new { id = course.Id }, null)</td>
+                        <td>@course.Department.Name</td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditCourse", "Course", new { id = course.Id }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Delete", "DeleteCourse", "Course", new { id = course.Id }, new { onclick = "return confirm('Are you sure?');", @class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#course").DataTable();
+        })
+    </script>
+}
+

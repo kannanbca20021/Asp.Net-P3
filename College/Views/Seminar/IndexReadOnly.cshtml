@@ -1,0 +1,43 @@
+﻿@model List<College.Models.Seminar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>Seminars</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover table-striped table-bordered" id="seminar">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var seminar in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(seminar.Name, "SeminarDetails", "Seminar", new { id = seminar.Id }, null)</td>
+                    <td>@seminar.Department.Name</td>
+                    <td>@seminar.Date.ToLongDateString()</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#seminar").DataTable();
+        })
+    </script>
+}

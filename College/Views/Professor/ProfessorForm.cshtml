@@ -1,0 +1,46 @@
+﻿@model College.ViewModels.ProfessorFormViewModel
+@{
+    ViewBag.Title = "ProfessorForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>New Professor</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("SaveProfessor", "Professor"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(d => d.Professor.Name)
+                @Html.TextBoxFor(d => d.Professor.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Professor.Name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(d => d.Professor.ExperienceInYears)
+                @Html.TextBoxFor(d => d.Professor.ExperienceInYears, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Professor.ExperienceInYears)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(d => d.Professor.DepartmentId)
+                @Html.DropDownListFor(d => d.Professor.DepartmentId, new SelectList(Model.Departments, "Id", "Name"), "Select", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Professor.DepartmentId)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(d => d.Professor.PostId)
+                @Html.DropDownListFor(d => d.Professor.PostId, new SelectList(Model.Posts, "Id", "Name"), "Select", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Professor.PostId)
+            </div>
+            @Html.HiddenFor(d => d.Professor.Id)
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary">Submit</button>
+        }
+    </div>
+</div>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

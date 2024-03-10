@@ -1,0 +1,53 @@
+﻿@model List<College.Models.Seminar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>Seminars</h1>
+    </div>
+    <div class="col-md-6 text-right">
+        <h1>
+            @Html.ActionLink("Add Seminar", "AddSeminar", "Seminar", new {}, new {@class = "btn btn-primary"})
+        </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover table-striped table-bordered" id="seminar">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Date</th>
+                <th>Edit/Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var seminar in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(seminar.Name, "SeminarDetails", "Seminar", new { id = seminar.Id }, null)</td>
+                    <td>@seminar.Department.Name</td>
+                    <td>@seminar.Date.ToLongDateString()</td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditSeminar", "Seminar", new { id = seminar.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Delete", "DeleteSeminar", "Seminar", new { id = seminar.Id }, new { onclick = "return confirm('Are you sure?');", @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#seminar").DataTable();
+        })
+    </script>
+}

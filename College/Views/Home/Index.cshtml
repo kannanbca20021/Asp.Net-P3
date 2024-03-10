@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Welcome</h1>
+    <h3 class="">Welcome to college management web application. This application is developed using ASP.NET MVC 5 framework.</h3>
+@*    <p>*@
+@*        <a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a>*@
+@*    </p>*@
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Department</h2>
+        <p>
+            This section will list all departments and allow users to get details of each department.
+        </p>
+        <p>
+            @Html.ActionLink("Learn more »", "Index", "Department", null, new {@class="btn btn-primary"})
+        </p>
+    </div>
+    <div class="col-md-3">
+        <h2>Course</h2>
+        <p>
+            This section will list all cuorses and allow users to get details of each course.
+        </p>
+        <p>
+            @Html.ActionLink("Learn more »", "Index", "Course", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+    <div class="col-md-3">
+        <h2>Professors</h2>
+        <p>
+            This section will list all professors and allow users to get details of each professor.
+        </p>
+        <p>
+            @Html.ActionLink("Learn more »", "Index", "Professor", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+    <div class="col-md-3">
+        <h2>Seminars</h2>
+        <p>
+            This section will list all seminars and allow users to get details of each Seminar.
+        </p>
+        <p>
+            @Html.ActionLink("Learn more »", "Index", "Seminar", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>

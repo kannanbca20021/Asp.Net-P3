@@ -1,0 +1,55 @@
+﻿@model List<College.Models.Post>
+@{
+    ViewBag.Title = "ManagePost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>Manage Posts</h1>
+    </div>
+    <div class="col-md-6 text-right">
+        <h1>
+            @Html.ActionLink("Add Post", "AddPost", "Professor", new { }, new { @class = "btn btn-primary" })
+        </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover table-striped table-bordered" id="post">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Edit/Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var post in Model)
+            {
+                    <tr>
+                        <td>@post.Name</td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditPost", "Professor", new { id = post.Id }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Delete", "DeletePost", "Professor", new { id = post.Id }, new { onclick = "return confirm('Are you sure?');", @class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#post").DataTable();
+        })
+    </script>
+}

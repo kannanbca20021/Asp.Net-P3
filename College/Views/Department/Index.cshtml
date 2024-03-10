@@ -1,0 +1,66 @@
+﻿@using College.Models
+@model List<Department>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>Departments</h1>
+    </div>
+    <div class="col-md-6 text-right">
+        <h1>
+            @Html.ActionLink("Add Department", "AddDepartment", "Department", new {}, new {@class = "btn btn-primary"})
+            @Html.ActionLink("Add Event", "AddEvent", "Department", new {}, new {@class = "btn btn-primary"})
+        </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover table-bordered table-striped" id="department">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Events</th>
+                <th>Edit</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var department in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(department.Name, "DepartmentDetails", "Department", new {id = department.Id}, null)</td>
+                    <td>
+                        @if (department.EventId.HasValue)
+                        {
+                            @Html.ActionLink(department.Event.Name, "EventDetails", "Department", new {id = department.Event.Id}, null)
+                        }
+                        else
+                        {
+                            <text>-</text>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditDepartment", "Department", new { id = department.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Delete", "DeleteDepartment", "Department", new { id = department.Id }, new { onclick = "return confirm('Are you sure?');", @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#department").DataTable();
+        })
+    </script>
+}

@@ -1,0 +1,28 @@
+﻿@model College.Models.Post
+@{
+    ViewBag.Title = "SavePost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>New Post</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("SavePost", "Professor"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(d => d.Name)
+                @Html.TextBoxFor(d => d.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Name)
+            </div>
+            @Html.HiddenFor(d => d.Id)
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary">Submit</button>
+        }
+    </div>
+</div>
+
+
